@@ -44,18 +44,6 @@ export async function GET(req: Request) {
             src={imageData}
           />
 
-          {/* Lighting Effects */}
-          {/* <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              backgroundImage:
-                "radial-gradient(circle at 0% 15%, #FFBD7A22, rgba(0,0,0,0) 40%), radial-gradient(circle at 100% 85%, #9E7AFF22,rgba(0,0,0,0) 40%)",
-            }}
-          ></div> */}
-
           <h1 tw="absolute inset-0 flex justify-center items-center mb-57 flex-row">
             <img
               tw="h-10 w-10"
@@ -67,7 +55,6 @@ export async function GET(req: Request) {
               tw="ml-3"
               style={{
                 background:
-                  // "linear-gradient(180deg,rgba(240,238,249,.8) 0%,#E2E8FF 100%)",
                   'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(156, 163, 175, 1) 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
@@ -86,10 +73,6 @@ export async function GET(req: Request) {
               style={{
                 position: 'absolute',
                 whiteSpace: 'pre-wrap',
-                // background:
-                //   "linear-gradient(180deg,rgba(240,238,249,.8) 0%,#E2E8FF 100%)",
-                // background:
-                //   "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(156, 163, 175, 0.6) 100%)",
                 background:
                   'linear-gradient(315deg,#9E7AFF 0%,#FE8BBB 33.33%,#FFBD7A 66.67%,#F8EAC3 100%)',
                 backgroundClip: 'text',
@@ -111,7 +94,6 @@ export async function GET(req: Request) {
               style={{
                 background:
                   'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(156, 163, 175, 1) 100%)',
-                // "linear-gradient(180deg,rgba(240,238,249,.8) 0%,#E2E8FF 100%)",
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 color: 'transparent',
