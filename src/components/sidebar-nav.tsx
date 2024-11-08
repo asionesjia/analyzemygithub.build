@@ -58,6 +58,7 @@ export function DocsSidebarNavItems({ items, pathname, groupId }: DocsSidebarNav
             {pathname === item.href && (
               <motion.div
                 layoutId={groupId}
+                // @ts-ignore
                 className="absolute inset-0 rounded-r-md border-l-2 border-neutral-300 bg-neutral-100 dark:border-neutral-600 dark:bg-neutral-800"
                 initial={false}
                 transition={{
