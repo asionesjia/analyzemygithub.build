@@ -19,7 +19,7 @@ import {
   calculateTimeDecay,
   calculateUserWeightedStars,
 } from '~/lib/githubAnalysis/algorithms'
-import { Metrics } from '~/types/metrics'
+import type { Metrics } from '~/types/metrics'
 import { uniqueCommitContributionsByRepository } from '~/lib/githubAnalysis/utils'
 import { inferNationAndSkills } from '~/lib/openai/analyzeGithub'
 import { insertAnalysis } from '~/server/mongodb/api'
@@ -135,7 +135,7 @@ export const publicAnalyzeAction = streamResponse(async function* (username?: st
         repositories: contributionsResult
           ? uniqueCommitContributionsByRepository(
               contributionsResult?.user.contributionsCollection.commitContributionsByRepository,
-            ).map((item) => item.repository)
+            ).map((item) => item.repository as Repository)
           : undefined,
         ...starredRepositoriesResult?.user,
         ...pullRequestsResult?.user,
@@ -383,7 +383,7 @@ const getRepositoryCommitCountsByMonth = async (repository: Repository) => {
 }
 
 export const inferUserNationAndSkillsByOpenai = async (data: GitHubUser) => {
-  let activityTime: Date[] = []
+  const activityTime: Date[] = []
   let readme = ''
 
   if (data.repositories) {
