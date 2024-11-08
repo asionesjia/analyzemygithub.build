@@ -1,0 +1,133 @@
+Analyze the provided text (which contains two parts: Date information and Readme text). The task consists of two sub-tasks: first, infer the user's possible country and credibility based on Date active time zone and Readme text information; second, analyze the fields that the user may have expertise in through the Readme text and return a list of corresponding tags representing their areas of expertise and the degree of proficiency.
+
+# Steps
+
+1. **Identify and Extract Date Information**:
+   - Identify and extract the Date information from the provided text.
+   - Parse the Date's format to ensure proper identification of year, month, and day.
+   - Determine the possible active time zone based on the given Date information.
+
+2. **Determine User's Location and Credibility**:
+   - Use the active time zone derived from the Date to infer the user's likely country.
+   - Gather additional geographical or cultural hints from the Readme text to assist in determining the probable location.
+   - **Assess User Credibility**:
+     - Evaluate credibility based on both the content and writing style of the Readme text:
+       - **Linguistic Analysis**: Consider grammatical consistency, tone, and clarity of the language to determine credibility.
+       - **Content Depth**: Evaluate whether the Readme provides thorough explanations, showcases domain knowledge, or includes clear, detailed statements.
+     - Assign a credibility score on a scale from 0-5 (0: very untrustworthy, 5: very trustworthy).
+
+3. **Analyze Readme Content for Areas of Expertise**:
+   - **Identify Expertise Areas**: Analyze the Readme section to identify any specific technologies, domains, or expertise areas.
+   - **Determine Skill Proficiency by Field and Technology**:
+     - Group the identified skills into specific fields (e.g., frontend development, backend development).
+     - Assign a proficiency level to each skill (L0-L5):
+       - L0: Completely unfamiliar
+       - L1-L2: Basic understanding / beginner
+       - L3-L4: Intermediate / developing expertise
+       - L5: Highly proficient / expert knowledge.
+     - Structure each field with related technology stacks, showing individual proficiencies for each.
+
+# Output Format
+
+The output should include:
+
+1. **User Location and Credibility**:
+   - `"country"`: The inferred country based on provided data and time zone analysis.
+   - `"credibility"`: A numerical rating of the user’s credibility from 0 to 5.
+
+2. **Areas of Expertise**:
+   - A list of fields (e.g., machine learning, front-end development) and associated proficiency levels.
+   - Format the output as follows:
+
+```json
+{
+  "user_info": {
+    "country": "[Inferred country]",
+    "credibility": [0-5]
+  },
+  "expertise_fields": [
+    {
+      "field": "[Field name]",
+      "proficiency": [
+        {
+           "field": "[skill_tag]"
+           "level": "L0-L5"
+        },
+        {
+           "field": "[skill_tag]"
+           "level": "L0-L5"
+        },
+      ]
+    },
+    {
+      "field": "[Field name]",
+      "level": "L0-L5"
+      "proficiency": [
+        {
+           "field": "[skill_tag]"
+           "level": "L0-L5"
+        },
+        {
+           "field": "[skill_tag]"
+           "level": "L0-L5"
+        },
+      ]
+    },
+  ]
+}
+```
+
+# Examples
+
+**Input**:
+```
+Date: March 15, 2023
+Readme: "I have been working with Java and SpringBoot mainly, but I am shifting my focus to front-end development with React."
+```
+
+**Output**:
+```json
+{
+  "user_info": {
+    "country": "United States",
+    "credibility": 3
+  },
+  "expertise_fields": [
+    {
+      "field": "backend development",
+      "proficiency": [
+        {
+          "field": "SpringBoot",
+          "level": "L5"
+        },
+        {
+          "field": "Flask",
+          "level": "L3"
+        }
+      ]
+    },
+    {
+      "field": "front-end development",
+      "proficiency": [
+        {
+          "field": "Next.js",
+          "level": "L5"
+        },
+        {
+          "field": "React",
+          "level": "L5"
+        }
+      ]
+    }
+  ]
+}
+```
+
+*(Note: Real examples should have more extensive readme content that may refer to multiple skill areas, hence resulting in more diverse expertise fields and proficiency ratings.)*
+
+# Notes
+
+- **Date Formats**: Date information must support multiple formats (e.g., "YYYY年MM月DD日", "MM/DD/YYYY", or "Month DD, YYYY").
+- **Inference Context**: Use cultural references, common expressions, or technical terminology to infer the user's region.
+- **Credibility Scale Justification**: Provide additional reasoning for each credibility rating to support transparency.
+- **Skill Matching Cues**: Look for specific keywords, technologies, and contextual cues that demonstrate the user's familiarity or level of expertise within different domains.

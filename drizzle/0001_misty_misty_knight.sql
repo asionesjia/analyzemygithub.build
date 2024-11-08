@@ -1,0 +1,1 @@
+ALTER TABLE "analyzemygithub_session" ADD COLUMN "github_access_token" varchar(512);

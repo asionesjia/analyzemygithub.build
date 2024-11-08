@@ -1,0 +1,1 @@
+ALTER TABLE "analyzemygithub_session" DROP COLUMN IF EXISTS "github_access_token";
