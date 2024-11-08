@@ -2,7 +2,7 @@
 
 import { streamResponse } from '~/actions/iterateStream'
 import { apiServer } from '~/trpc/server'
-import { GithubDetails, GitHubUser, Repository } from '~/server/api/routers/github/types'
+import type { GithubDetails, GitHubUser, Repository } from '~/server/api/routers/github/types'
 import {
   calculateActivityScore,
   calculateCommunityActivityScore,
@@ -157,7 +157,7 @@ export const publicAnalyzeAction = streamResponse(async function* (username?: st
     const inferUserNationAndSkillsResult =
       await inferUserNationAndSkillsByOpenai(analyzedUserResult)
     yield { index: 13, message: '通过Openai gpt-4o分析推测成功。', error: null }
-    const _id = await insertAnalysis({
+    await insertAnalysis({
       ...analyzedUserResult,
       infer: inferUserNationAndSkillsResult,
     })
@@ -232,7 +232,7 @@ const handleOriginGithubData = async (data: GitHubUser) => {
       return {
         ...repository,
         totalCommits: repositoryCommitCountResult?.totalCount,
-        repositoryContributors: repositoryContributorsResult || [], // 返回空数组而不是 null
+        repositoryContributors: repositoryContributorsResult ?? [], // 返回空数组而不是 null
         commitCountsByMonth: commitCountsByMonth,
         metrics: {
           ...resultMetricsResult,
@@ -240,7 +240,7 @@ const handleOriginGithubData = async (data: GitHubUser) => {
         },
         weight,
       }
-    }) || [], // 处理可能为 undefined 的情况
+    }) ?? [], // 处理可能为 undefined 的情况
   )
 
   const contributionMetrics = calculateContributionsByContributionCalendar(
@@ -311,8 +311,8 @@ const getRepositoryCommitCountsByMonth = async (repository: Repository) => {
   const oneYearAgo = new Date(nowDate)
   oneYearAgo.setFullYear(nowDate.getFullYear() - 1)
 
-  let since = new Date(createdAtDate > oneYearAgo ? createdAtDate : oneYearAgo)
-  let until = new Date(since)
+  const since = new Date(createdAtDate > oneYearAgo ? createdAtDate : oneYearAgo)
+  const until = new Date(since)
   until.setMonth(since.getMonth() + 1)
 
   const promiseArray = []
@@ -384,7 +384,7 @@ const getRepositoryCommitCountsByMonth = async (repository: Repository) => {
 
 export const inferUserNationAndSkillsByOpenai = async (data: GitHubUser) => {
   let activityTime: Date[] = []
-  let readme: string = ''
+  let readme = ''
 
   if (data.repositories) {
     for (const repository of data.repositories) {
