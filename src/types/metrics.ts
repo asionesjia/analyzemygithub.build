@@ -1,7 +1,5 @@
 export type Metrics = {
-  repositories: {
-    [key: string]: RepositoryMetricsConnection
-  }
+  repositories: Record<string, RepositoryMetricsConnection>
   contribution: {
     contributionIndex: number
     totalContributions: number
