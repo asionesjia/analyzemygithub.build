@@ -54,6 +54,7 @@ const LoaderCore = ({
         return (
           <motion.div
             key={index}
+            // @ts-ignore
             className={cn('mb-4 flex gap-2 text-left')}
             initial={{ opacity: 0, y: -(value * 40) }}
             animate={{ opacity: opacity, y: -(value * 40) }}
@@ -113,6 +114,7 @@ export const MultiStepLoader = ({
           transition={{
             duration: 0.5,
           }}
+          // @ts-ignore
           className="fixed inset-0 z-[100] flex h-full w-full items-center justify-center backdrop-blur-2xl"
         >
           <div className="relative h-96">
